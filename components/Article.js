@@ -86,6 +86,25 @@ const data = [
     thirdParagraph: `Hodor hodor - hodor... Hodor hodor hodor hodor. Hodor. Hodor! Hodor hodor, hodor hodor hodor hodor hodor; hodor hodor? Hodor!
           Hodor hodor, HODOR hodor, hodor hodor?! Hodor! Hodor hodor, HODOR hodor, hodor hodor, hodor, hodor hodor. Hodor, hodor.
           Hodor. Hodor, hodor, hodor. Hodor hodor... Hodor hodor hodor?! Hodor, hodor... Hodor hodor HODOR hodor, hodor hodor. Hodor.`
+  },
+  {
+    title: 'Here is a cool title!',
+    date: 'April 24, 1990',
+    firstParagraph: `Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text 
+    ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, 
+    but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing 
+    Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.`,
+
+    secondParagraph: `Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, 
+    making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, 
+    consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes 
+    from sections 1.10.32 and 1.10.33 of "de Finibus Bonorum et Malorum" (The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the 
+    theory of ethics, very popular during the Renaissance. The first line of Lorem Ipsum, "Lorem ipsum dolor sit amet..", comes from a line in section 1.10.32.`,
+
+    thirdParagraph: `It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using 
+    Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. 
+    Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites 
+    still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).`
   }
 ];
 
@@ -114,3 +133,54 @@ const data = [
   Step 5: Try adding new article object to the data array. Make sure it is in the same format as the others.
   Refresh the page to see the new article.
 */
+
+const articlesContainer = document.querySelector('.articles');
+
+function articleMaker (articleObj) {
+
+  const articleDiv = document.createElement('div');
+  articleDiv.classList.add('article');
+
+  const title = document.createElement('h2');
+  title.innerHTML = articleObj.title;
+
+  const date = document.createElement('p');
+  date.classList.add('date');
+  date.innerHTML = articleObj.date;
+
+  const firstPara = document.createElement('p');
+  firstPara.innerHTML = articleObj.firstParagraph;
+
+  const secondPara = document.createElement('p');
+  secondPara.innerHTML = articleObj.secondParagraph;
+
+  const thirdPara = document.createElement('p');
+  thirdPara.innerHTML = articleObj.thirdParagraph;
+
+  const expand = document.createElement('span');
+  expand.classList.add('expandButton');
+  expand.innerHTML = '+';
+
+  expand.addEventListener('click', (e) => {
+    articleDiv.classList.toggle('article-open');
+  });
+
+  articleDiv.appendChild(title);
+  articleDiv.appendChild(date);
+  articleDiv.appendChild(firstPara);
+  articleDiv.appendChild(secondPara);
+  articleDiv.appendChild(thirdPara);
+  articleDiv.appendChild(expand);
+
+  return articleDiv;
+}
+
+const articleItems = data.map((item) => {
+  return articleMaker(item);
+});
+
+articleItems.forEach((elements) => {
+  articlesContainer.appendChild(elements);
+});
+
+console.log(articleMaker(data[0]));
